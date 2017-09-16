@@ -2,6 +2,7 @@
 
 import json
 
+#required
 def did_x_and_y_act_together(data, actor_id_1, actor_id_2):
     '''
     :param data: The database to check the relationship between the two actors
@@ -15,6 +16,7 @@ def did_x_and_y_act_together(data, actor_id_1, actor_id_2):
             return True
     return False
 
+#required
 def get_actors_with_bacon_number(data, n):
     '''
     :param data: The database containing the actors
@@ -33,6 +35,27 @@ def get_actors_with_bacon_number(data, n):
                 degree_list.append(actor_id)
                 visited.add(actor_id)
     return degree_list
+
+def convert_to_dict(data):
+    '''
+    :param data:
+    :return:
+    '''
+    output = {}
+    #entry is [actor_id1, actor_id2, movie_id]
+    for entry in data:
+        if entry[0] in output.keys():
+            output[entry[0]].add(entry[1])
+        else:
+            output[entry[0]] = set(entry[1])
+
+        if entry[1] in output.keys():
+            output[entry[1]].add(entry[0])
+        else:
+            output[entry[1]] = set(entry[0])
+
+    return output
+
 
 def get_actor_name(data, actor_id):
     '''
@@ -77,11 +100,12 @@ def get_worked_with_set(data, actor_id_set):
         output.update(get_worked_with_actor(data, actor))
     return output
 
-
+#required
 def get_bacon_path(data, actor_id):
     BACON_ID = 4724
     return get_path(data, BACON_ID, actor_id)
 
+#required
 def get_path(data, actor_id_1, actor_id_2):
     initPath = [actor_id_1]
     pathQueue = [initPath]
