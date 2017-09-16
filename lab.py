@@ -38,8 +38,8 @@ def get_actors_with_bacon_number(data, n):
 
 def convert_to_dict(data):
     '''
-    :param data:
-    :return:
+    :param data: The dataset
+    :return: A dictionary
     '''
     output = {}
     #entry is [actor_id1, actor_id2, movie_id]
